@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+{% block titre %} Gestion des annonces {% endblock %}
+
+{% block body %}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+
+                <h3>Liste des commandes</h3>
+
+    <div class="page-header card">
+        <div class="card-block">
+            <h5 class="m-b-10">Gestion des commandes
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <span>
+                                              <button  class="btn btn-success">
+                                                  <a href="{{ path('commande_ajouter')  }}"><i class="icofont icofont-plus"></i></a>Ajouter</button>
+                                            </span>
+
+
+            </h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html.twig"> <i class="fa fa-home"></i> </a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Gestion des commandes</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Listes des commandes</h5>
+
+            <div class="card-header-right">
+                <ul class="list-unstyled card-option">
+                    <li><i class="fa fa-chevron-left"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-times close-card"></i></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- tabs card start -->
+        <div class="col-sm-12">
+            <div class="card tabs-card">
+                <div class="card-block p-0">
+                    <!-- Nav tabs -->
+
+                    <!-- Tab panes -->
+                    <div class="tab-content card-block">
+                        <div class="tab-pane active" id="home3" role="tabpanel">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>prix totale</th>
+                                        <th>prix livraison</th>
+                                        <th>date commande</th>
+                                        <th>Produit</th>
+
+                                    </tr>
+                               {% for commande in commandes %}
+
+                                   <tr>
+                               <td> {{ commande.prixtotale }}</td>
+                               <td> {{ commande.prixlivr }}</td>
+                                <td> {{ commande.datecom|date }}</td>
+                                 <td>{{ commande.produit }}</td>
+                                       <td>
+                                           <button>
+
+                                           <a href="{{ path('commande_modifier', { 'id' : entity.id|default('1') })  }}" ><i class="fa fa-edit" style="font-size:18px"></i></a></button>
+                                           <a href="#" onClick="javascript:popUp('')"><i class="fa fa-eye" style="font-size:18px"></i></a>
+                                           <button>
+
+                                           <a href="{{ path('commande_supprimer', { 'id' : entity.id|default('1') })  }}"><i class="fa fa-trash" style="font-size:18px"></i></a>
+                                               </button>
+
+
+                                       </td>
+                                       {% endfor %}
+
+                                   </tr>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabs card end -->
+
+    </div>
+
+
+
+
+
+
+    </div>
+
+    <div id="styleSelector">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

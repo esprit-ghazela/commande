@@ -1,0 +1,28 @@
+commande_homepage:
+    path:     /
+    defaults: { _controller: CommandeBundle:Default:index}
+commande_ajouter:
+    path:     /ajouter
+    defaults: { _controller: CommandeBundle:Commande:ajouter }
+commande_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: CommandeBundle:Commande:modifier }
+
+commande_afficher:
+        path:     /list
+        defaults: { _controller: CommandeBundle:Commande:afficher}
+commande_supprimer:
+        path:     /d/{id}
+        defaults: { _controller: CommandeBundle:Commande:supprimer}
+livraison_ajouter:
+        path:    lv/ajouter
+        defaults: { _controller: CommandeBundle:livraison:ajouter }
+livraison_modifier:
+         path:     lv/modifier/{id}
+         defaults: { _controller: CommandeBundle:livraison:modifier }
+livraison_afficher:
+         path:     lv/list
+         defaults: { _controller: CommandeBundle:livraison:afficher}
+livraison_supprimer:
+         path:     lv/d/{id}
+         defaults: { _controller: CommandeBundle:livraison:supprimer}
