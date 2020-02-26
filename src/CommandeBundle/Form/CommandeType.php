@@ -2,6 +2,7 @@
 
 namespace CommandeBundle\Form;
 
+use CommandeBundle\Entity\Etat;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,10 @@ class CommandeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('prixTotale')->add('prixlivr')->add('dateCom')->add('produit')->add('ajouter',SubmitType::class);
+        $builder->add('prixprod')->add('prixlivr')->add('produit')->add('etat',Etat::class,array(
+            'empty_data' => 'En Attente'
+
+        ))->add('Submit',SubmitType::class);;
     }/**
      * {@inheritdoc}
      */

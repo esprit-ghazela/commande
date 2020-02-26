@@ -1,0 +1,8 @@
+
+
+Total price:  {{ commande.amount }}DT
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<input type="submit" value="Pay € {{ commande.amount }}" />
+{{ form_end(form) }}

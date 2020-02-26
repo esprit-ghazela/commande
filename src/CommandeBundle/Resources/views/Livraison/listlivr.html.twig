@@ -64,21 +64,27 @@
     <tr>
         <th>adresse de livraison</th>
         <th>date livraison</th>
+        <th>etat</th>
+
 
     </tr>
     {% for livraison in livraisons %}
 
         <tr>
+
             <td> {{ livraison.adresseLivr }}</td>
-            <td> {{ livraison.datelivr|date }}</td>
+            <td> {{ livraison.datelivr|date('Y-m-d') }}</td>
+            <td> {{ livraison.etat }}</td>
+
+
             <td>
                 <button>
 
-                    <a href="{{ path('livraison_modifier', { 'id' : entity.id|default('1') })  }}" ><i class="fa fa-edit" style="font-size:18px"></i></a></button>
+                    <a href="{{ path('livraison_modifier', { 'id' : livraison.id })  }}" ><i class="fa fa-edit" style="font-size:18px"></i></a></button>
                 <a href="#" onClick="javascript:popUp('')"><i class="fa fa-eye" style="font-size:18px"></i></a>
                 <button>
 
-                    <a href="{{ path('livraison_supprimer', { 'id' : entity.id|default('1') })  }}"><i class="fa fa-trash" style="font-size:18px"></i></a>
+                    <a href="{{ path('livraison_supprimer', { 'id' : livraison.id })  }}"><i class="fa fa-trash" style="font-size:18px"></i></a>
                 </button>
 
 

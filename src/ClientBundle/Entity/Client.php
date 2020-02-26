@@ -3,6 +3,8 @@
 
 namespace ClientBundle\Entity;
 
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +23,14 @@ class Client extends BaseUser
     /**
      * @ORM\Column(type="string")
      */
+
     protected $nom;
+    /**
+     * Many Users have Many Groups.
+     * @ManyToMany(targetEntity="CommandeBundle\Entity\Commande", inversedBy="client")
+     * @JoinTable(name="clients_commandes")
+     */
+    protected $commande;
     /**
      * @ORM\Column(type="string")
      */
@@ -81,12 +90,31 @@ class Client extends BaseUser
         $this->prenom = $prenom;
     }
 
-
-
-
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->commande = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $commande
+     */
+    public function setCommande($commande)
+    {
+        $this->commande = $commande;
+    }
+
+
+
+
+
 }

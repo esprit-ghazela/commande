@@ -6,6 +6,7 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services.yml" }
     - { resource: "@VFrontBundle/Resources/config/services.yml" }
     - { resource: "@CommandeBundle/Resources/config/services.yml" }
+    - { resource: "@PaiementBundle/Resources/config/services.yml" }
 
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -87,3 +88,14 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\RegistrationType
+
+# config/packages/payment.yaml
+jms_payment_core:
+    encryption:
+        secret: def0000018d990af5304d9cee1068687c8827de4bf5e992a0e7a9e4d1df14b0def80717c9da221554fd70af7f5d1cfa24ea2dedacd3ef3141f8dc9f531a1983fbd71b6d1
+
+# config/packages/payment.yaml
+jms_payment_paypal:
+    username: sb-t0qq11072989_api1.business.example.com
+    password: CCAYE62MHFPQWNZ8
+    signature: AcFHC8-bPIDZ88ii3yYZm66tFJ6VAN3snLViHcZiPPbcEQH0yeJJGutg

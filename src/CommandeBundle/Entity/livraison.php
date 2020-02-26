@@ -1,8 +1,11 @@
 <?php
 
 namespace CommandeBundle\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToOne;
+
 
 /**
  * livraison
@@ -32,7 +35,53 @@ class livraison
      *
      * @ORM\Column(name="datelivr", type="date")
      */
+
     private $datelivr;
+    /**
+     *
+     * @ORM\Column(name="etat", type="string", length=255)
+     */
+
+    private $etat;
+    /**
+     * @OneToOne(targetEntity="CommandeBundle\Entity\Commande",inversedBy="livraison")
+     *@JoinColumn(name="commande_id", referencedColumnName="id")
+     */
+    private $commande;
+
+    /**
+     * @return mixed
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param mixed $commande
+     */
+    public function setCommande($commande)
+    {
+        $this->commande = $commande;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
+
 
     /**
      * Get id

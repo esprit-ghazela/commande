@@ -8,6 +8,9 @@ v_front_comm:
     path:     /comm
     defaults: { _controller: VFrontBundle:Main:comm }
 v_front_livr:
-        path:     /liv
-        defaults: { _controller: VFrontBundle:Main:livr }
+        path:  /liv
+        defaults: { _controller: VFrontBundle:Main:ajouter }
+v_front_order:
+    path:     /commande
+    defaults: { _controller: VFrontBundle:Main:afficher }
 

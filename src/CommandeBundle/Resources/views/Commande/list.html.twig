@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
-{% block titre %} Gestion des annonces {% endblock %}
+{% block titre %} Gestion des Commandes {% endblock %}
 
 {% block body %}
+
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -14,11 +15,14 @@
     <div class="page-header card">
         <div class="card-block">
             <h5 class="m-b-10">Gestion des commandes
+
+
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <span>
                                               <button  class="btn btn-success">
                                                   <a href="{{ path('commande_ajouter')  }}"><i class="icofont icofont-plus"></i></a>Ajouter</button>
+
                                             </span>
 
 
@@ -33,6 +37,17 @@
             </ul>
         </div>
     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Recherche avancée
+                                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+
+                            </h5>
+
+
+                        </div>
+                    </div>
+
 
     <div class="card">
         <div class="card-header">
@@ -60,37 +75,52 @@
                         <div class="tab-pane active" id="home3" role="tabpanel">
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-bordered">
+                                    <thead>
                                     <tr>
-                                        <th>prix totale</th>
-                                        <th>prix livraison</th>
-                                        <th>date commande</th>
                                         <th>Produit</th>
+                                        <th>Prix Produit</th>
+
+                                        <th>Prix livraison</th>
+                                        <th>Prix totale</th>
+                                        <th>Etat</th>
+                                        <th>Date commande</th>
+
 
                                     </tr>
+                                    </thead>
+                                    <tbody id="myTable">
                                {% for commande in commandes %}
+                                    {% set amount = commande.prixprod + commande.prixlivr  %}
 
                                    <tr>
-                               <td> {{ commande.prixtotale }}</td>
-                               <td> {{ commande.prixlivr }}</td>
-                                <td> {{ commande.datecom|date }}</td>
-                                 <td>{{ commande.produit }}</td>
+                                       <td>{{ commande.produit }}</td>
+                                       <td> {{ commande.prixprod }} DT</td>
+                                       <td> {{ commande.prixlivr }} DT</td>
+                                       <td> {{ amount }}DT</td>
+                                       <td> {{ commande.etat }}</td>
+                                       <td> {{ commande.datecom|date }}</td>
                                        <td>
                                            <button>
 
-                                           <a href="{{ path('commande_modifier', { 'id' : entity.id|default('1') })  }}" ><i class="fa fa-edit" style="font-size:18px"></i></a></button>
+                                           <a href="{{ path('commande_modifier', { 'id' : commande.id})  }}" ><i class="fa fa-edit" style="font-size:18px"></i></a></button>
                                            <a href="#" onClick="javascript:popUp('')"><i class="fa fa-eye" style="font-size:18px"></i></a>
                                            <button>
 
-                                           <a href="{{ path('commande_supprimer', { 'id' : entity.id|default('1') })  }}"><i class="fa fa-trash" style="font-size:18px"></i></a>
-                                               </button>
+                                           <a href="{{ path('commande_supprimer', { 'id' : commande.id })  }}"><i class="fa fa-trash" style="font-size:18px"></i></a>
 
 
+
+                                           </form>
                                        </td>
+
+
                                        {% endfor %}
 
                                    </tr>
+                                    </tbody>
                                 </table>
+
                             </div>
 
                         </div>

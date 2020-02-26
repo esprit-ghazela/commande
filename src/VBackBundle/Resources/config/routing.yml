@@ -31,6 +31,9 @@ gestion_evenement:
 gestion_livraison:
     path:     /gestion_livraison
     defaults: { _controller: CommandeBundle:livraison:afficher }
+gestion_paiement:
+    path:     /gestion_paiement
+    defaults: { _controller: PaiementBundle:Paiement:afficherP }
 gestion_publicite:
     path:     /gestion_publicite
     defaults: { _controller: VBackBundle:Default:gestion_publicite }

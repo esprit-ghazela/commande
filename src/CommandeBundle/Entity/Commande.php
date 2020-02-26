@@ -1,13 +1,16 @@
 <?php
 
 namespace CommandeBundle\Entity;
-
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
+
 
 /**
- * Commande
  *
  * @ORM\Table(name="commande")
  * @ORM\Entity(repositoryClass="CommandeBundle\Repository\CommandeRepository")
@@ -22,23 +25,32 @@ class Commande
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="prixTotale", type="integer")
+     * @ManyToMany(targetEntity="ClientBundle\Entity\Client", mappedBy="Commande")
      */
-    private $prixTotale;
+    private $client;
 
     /**
+     * @var int
+     * @Assert\GreaterThanOrEqual(0)
+     * @ORM\Column(name="prixprod", type="integer")
+     */
+    private $prixprod;
+    /**
      *
+     * @ORM\Column(type="decimal", precision=10, scale=5)
+     */
+    private $amount;
+
+    /**
+     * @Assert\GreaterThanOrEqual(0)
      * @ORM\Column(name="prixlivr", type="integer")
      */
     private $prixlivr;
 
     /**
      *
-     * @ORM\Column(name="dateCom", type="date")
+     * @ORM\Column(name="dateCom", type="datetime")
      */
     private $dateCom;
     /**
@@ -47,15 +59,20 @@ class Commande
      */
     private $produit;
     /**
-     * @OneToOne(targetEntity="livraison")
-     * @JoinColumn(name="livraison_id", referencedColumnName="id")
+     *
+     * @ORM\ManyToOne(targetEntity="CommandeBundle\Entity\Etat",inversedBy="commande")
      */
-    private $shipment;
 
-
-
-
+    private $etat;
+    /**
+     * @OneToOne(targetEntity="CommandeBundle\Entity\livraison",mappedBy="commande")
+     */
     private $livraison;
+    /**
+     * @OneToOne(targetEntity="PaiementBundle\Entity\Paiement",mappedBy="commande")
+     */
+    private $paiement;
+
 
     /**
      * @return mixed
@@ -122,22 +139,7 @@ class Commande
      *
      * @return Commande
      */
-    public function setPrixTotale($prixTotale)
-    {
-        $this->prixTotale = $prixTotale;
 
-        return $this;
-    }
-
-    /**
-     * Get prixTotale
-     *
-     * @return string
-     */
-    public function getPrixTotale()
-    {
-        return $this->prixTotale;
-    }
 
     /**
      * @return mixed
@@ -155,5 +157,93 @@ class Commande
         $this->livraison = $livraison;
     }
 
-}
+    /**
+     * @return string
+     */
+    public function getPrixprod()
+    {
+        return $this->prixprod;
+    }
 
+    /**
+     * @param string $prixprod
+     */
+    public function setPrixprod($prixprod)
+    {
+        $this->prixprod = $prixprod;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
+    public function __toString()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param $amount
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+
+    /**
+     * @param mixed $amount
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+    }
+    public function __construct() {
+        $this->client = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaiement()
+    {
+        return $this->paiement;
+    }
+
+    /**
+     * @param mixed $paiement
+     */
+    public function setPaiement($paiement)
+    {
+        $this->paiement = $paiement;
+    }
+
+}
+/*name="amount", type="integer",nullable=true*/
